@@ -1,0 +1,107 @@
+{
+  "name": "github-stars-manager",
+  "version": "1.2.0",
+  "description": "This extension allows you to manage and organize your Github stars with tags and create categorized bookmark folder with the tags you created.",
+  "main": "index.js",
+  "watch": {
+    "start": {
+      "patterns": [
+        "src/**/"
+      ],
+      "extensions": "js,styl"
+    }
+  },
+  "scripts": {
+    "watch": "npm-watch",
+    "start": "npm run webpack:dev",
+    "encrypt": "blackbox_register_new_file ./src/assets/js/keys.js",
+    "decrypt": "blackbox_decrypt_all_files",
+    "webpack:dev": "webpack --config 'webpack.config.dev.babel.js'",
+    "build": "webpack --config 'webpack.config.prod.babel.js'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint './src/**/*.js'",
+    "precommit": "npm run lint",
+    "prepush": "npm run lint"
+  },
+  "author": "Gabriel Godoy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrielgodoy/github-stars-manager/issues"
+  },
+  "homepage": "https://github.com/gabrielgodoy/github-stars-manager#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielgodoy/github-stars-manager.git"
+  },
+  "keywords": [
+    "github",
+    "star",
+    "chrome",
+    "extension",
+    "browser",
+    "manager",
+    "tags",
+    "manage",
+    "developer"
+  ],
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-3"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "google",
+    "installedESLint": true,
+    "env": {
+      "browser": true,
+      "node": true,
+      "mocha": true
+    },
+    "rules": {
+      "max-len": [
+        "error",
+        100
+      ],
+      "object-curly-spacing": "off"
+    },
+    "parser": "babel-eslint"
+  },
+  "dependencies": {
+    "autoprefixer": "^6.6.0",
+    "axios": "^0.15.3",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "chai": "^3.5.0",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.12.2",
+    "eslint-loader": "^1.6.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "husky": "^0.12.0",
+    "jsdom": "^9.9.1",
+    "json-loader": "^0.5.4",
+    "mocha": "^3.2.0",
+    "moment": "^2.17.1",
+    "npm-run-all": "^3.1.2",
+    "npm-watch": "^0.1.7",
+    "postcss": "^5.2.8",
+    "postcss-loader": "^1.2.1",
+    "rimraf": "^2.5.4",
+    "sinon": "^1.17.7",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.4.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "devDependencies": {
+    "eslint": "3.12.2",
+    "eslint-config-google": "^0.7.1"
+  }
+}

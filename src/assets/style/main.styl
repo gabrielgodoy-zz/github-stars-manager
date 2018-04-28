@@ -1,0 +1,169 @@
+$darkGrey = #333333
+$mediumGrey = #767676
+$lightGrey = #e5e5e5
+$link = #4078c0
+$almostWhite = #f5f5f5
+
+// Color Tags
+$green = #16a085
+$lightGreen = #27ae60
+$blue = #2980b9
+$purple = #8e44ad
+$asphalt = #2c3e50
+$orange = #f39c12
+$pumpkin = #d35400
+$red = #c0392b
+$grey = #7f8c8d
+$base-line-height = 15px
+$spin-duration = 1s
+
+@keyframes :global(spin) {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
+:global
+  .ghstarsmngr-repo-description
+    margin-top: 10px
+    color: $mediumGrey
+    font-size: 14px
+
+  .ghstarmngr-create-tag-bt
+    svg
+      display: inline-block
+      vertical-align: middle
+
+  .ghstarsmngr-repo-title
+    font-size 17px
+
+  .ghstarmngr-repo-footer-tags
+    margin: 15px 0 0
+
+    > *
+      display: inline-block
+      vertical-align: middle
+
+    > svg
+      margin-right: 5px
+      fill: $mediumGrey
+
+    p
+      margin: 0
+      font-size: 12px
+      color $mediumGrey
+
+    .ghstarmngr-tag-cell
+      font-size: 12px
+      padding: 3px 10px
+      border-radius: 2px
+      border: 1px solid $lightGrey
+      margin: 4px 0 4px 8px
+      text-transform: lowercase
+      cursor: pointer
+      position: relative
+      transition: border .3s
+
+      &:before
+        content: ''
+        transition: opacity .3s
+        display: block
+        opacity: 0
+        position: absolute
+        background: rgba($red, .8)
+        left: 0
+        right: 0
+        top: 0
+        bottom: 0
+        width: 100%
+        z-index: 8
+
+      &:hover
+        border: 1px solid $red
+
+        .ghstarmngr-delete-tag-icon
+          opacity: 1
+
+      &:hover:before
+        opacity: 1
+
+      .ghstarmngr-delete-tag-icon
+        position: absolute
+        opacity: 0
+        z-index: 9
+        transition: opacity .3s
+        height: 14px
+        fill: white
+        left: 50%
+        top: 50%
+        transform: translate(-50%, -50%)
+
+  body
+    .ghstarmngr-loading-spinner
+      display: inline-block
+      vertical-align: middle
+      margin-right: 6px
+      border-radius: 50%
+      width: $base-line-height
+      height: $base-line-height
+      border: .15rem solid #ccc
+      border-top-color: #333
+      animation: spin $spin-duration infinite linear
+
+    .starring-container.js-social-container
+      &.on form.starred,
+      &:not(.on) form.unstarred,
+      > button
+        display: inline-block
+
+      > button svg
+        fill $darkGrey
+        display inline-block
+        vertical-align middle
+        margin-right 4px
+
+    .ghstarsmngr-hide
+      display: none !important
+
+    .ghstarmngr-loading-spinner-container
+      margin: 15px 0 0
+      font-size: 12px
+      color $mediumGrey
+
+    .ghstarmngr-bt-existing-tag
+      color: $mediumGrey
+      font-size: 12px
+      display: inline-block
+      vertical-align: middle
+      margin-left: 10px
+
+      svg
+        position: relative
+        top: 1px
+        margin-right: 2px
+
+    .ghstarmngr-tag-header-link
+      cursor: pointer
+      color: rgba(255,255,255,0.75);
+
+      svg
+        margin-right: 4px
+        fill rgba(255,255,255,0.75)
+        display: inline-block
+        vertical-align: middle
+
+      &:hover,
+      &:focus,
+      &:active,
+      &.active-menu-header
+        color white
+        text-decoration: none
+
+        svg
+          fill white
+
+@import "_modal.styl"
+@import "_tagPage.styl"

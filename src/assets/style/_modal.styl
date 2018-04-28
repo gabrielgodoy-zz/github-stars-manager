@@ -1,0 +1,119 @@
+:global
+  .--locked
+    overflow: hidden
+    width: calc(100% - 15px)
+
+  .ghstarsmngr-no-existing-tags
+    color: $red !important
+    margin-top: 28px !important
+
+  .ghstarmngr-modal-mask
+    background: rgba(255, 255, 255, .6)
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 600
+
+    .ghstarmngr-close-button
+      fill $darkGrey
+      position: absolute
+      top: 30px
+      right: 30px
+      cursor: pointer
+      display: block
+
+  .ghstarmngr-modal-tag-list-container
+      max-height: 280px
+      border 1px solid $lightGrey
+      overflow: auto
+      overflow-x: hidden
+      margin: 20px 0 10px -25px
+      width: calc(100% + 50px)
+      border-radius: 4px
+      min-width: 250px
+
+  .ghstarmngr-modal-container
+    padding 30px 50px
+    max-height 450px
+    min-width 475px
+    overflow: hidden
+    background: white
+    text-align: center
+    border: 1px solid $lightGrey
+    position: fixed
+    top: 50%
+    left: 50%
+    transform translate(-50%, -50%)
+    z-index: 605
+    border-radius: 4px
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15)
+
+    p
+      color $mediumGrey
+
+      span
+        color $darkGrey
+
+    label,
+    input
+      margin-right: 15px
+
+    label
+      color $mediumGrey
+
+    .feedback-message
+      margin: 15px 0 0
+      font-size: 12px
+      opacity: 0
+      transition: opacity .3s
+
+      &.--error
+        color: $red
+
+      &.--success
+        color: $green
+
+      &.visible
+        opacity: 1
+
+  .ghstarmngr-modal-container,
+  .ghstarmngr-modal-mask
+    transition: opacity .3s
+    opacity: 1
+
+    &.hidden
+      opacity: 0
+      pointer-events none
+
+  .ghstarmngr-form-create-tag
+    margin-top: 30px
+
+  .ghstarmngr-title-modal
+    font-size: 16px
+    margin-bottom: 0
+
+  .ghstarmngr-subtitle-modal
+    margin: 3px 0
+    font-size: 11px
+
+  .ghstarmngr-modal-tag-list
+    margin-top: 0
+    list-style: none
+    text-align: center
+
+    li
+      &:last-child
+        border-bottom: none !important
+
+      .ghstarmngr-tag-item
+        width: 100%
+        display: block
+        cursor: pointer
+        padding: 8px 0
+        text-align: center
+        transition: background .3s
+
+        &:hover
+          background: $lightGrey
