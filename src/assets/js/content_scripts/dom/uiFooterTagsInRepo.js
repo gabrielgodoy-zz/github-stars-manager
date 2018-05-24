@@ -1,9 +1,9 @@
-import {$} from '../../helpers';
-import {StoredTagsMngr} from '../storageSync/StoredTagsMngr';
-import {StoredReposMngr} from '../storageSync/StoredReposMngr';
-import {StoredGenericMngr} from '../storageSync/StoredGenericMngr';
-import {getTagIcon, getTrashcan, getPlusIcon} from './uiSvgIcons';
-import {createTagsInStarsPage} from '../main';
+import { $ } from '../../helpers';
+import { StoredTagsMngr } from '../storageSync/StoredTagsMngr';
+import { StoredReposMngr } from '../storageSync/StoredReposMngr';
+import { StoredGenericMngr } from '../storageSync/StoredGenericMngr';
+import { getTagIcon, getTrashcan, getPlusIcon } from './uiSvgIcons';
+import { createTagsInStarsPage } from '../main';
 
 /**
  * Action when user click to delete a tag
@@ -20,20 +20,23 @@ export async function deleteTag(tag) {
  */
 export function insertLoader(message) {
   const repoList = getContainerDivRepo();
-  const repoListItems =
-    repoList.querySelectorAll('.d-block.width-full.py-4:not(.ghstarsmngr-hide)');
+  if (repoList) {
+    const repoListItems = repoList.querySelectorAll(
+      '.d-block.width-full.py-4:not(.ghstarsmngr-hide)'
+    );
 
-  repoListItems.forEach((repo) => {
-    if (repo.querySelector('.ghstarmngr-repo-footer-tags')) {
-      repo.querySelector('.ghstarmngr-repo-footer-tags').remove();
-    }
-    repo.innerHTML += `
+    repoListItems.forEach((repo) => {
+      if (repo.querySelector('.ghstarmngr-repo-footer-tags')) {
+        repo.querySelector('.ghstarmngr-repo-footer-tags').remove();
+      }
+      repo.innerHTML += `
       <div class="ghstarmngr-loading-spinner-container">
-        <div class="ghstarmngr-loading-spinner">
-        </div>
-        ${message}
+      <div class="ghstarmngr-loading-spinner">
+      </div>
+      ${message}
       </div>`;
-  });
+    });
+  }
 }
 
 /**
@@ -42,8 +45,9 @@ export function insertLoader(message) {
 export async function handleUnstarBtInStarPage(actionBt) {
   let actionType = actionBt.innerText.trim().toLowerCase();
   if (actionType === 'unstar') {
-    let repoID = actionBt.closest('.js-toggler-container')
-                         .querySelector('.ghstarmngr-create-tag-bt').dataset.repo;
+    let repoID = actionBt
+      .closest('.js-toggler-container')
+      .querySelector('.ghstarmngr-create-tag-bt').dataset.repo;
     await StoredGenericMngr.deleteKey('r', repoID);
     await StoredTagsMngr.checkForTagsNotBeingUsed();
     createTagsInStarsPage();
@@ -79,15 +83,19 @@ export function resetFeedbackMessage(delay = 0) {
  */
 export function removeLoader() {
   const repoList = getContainerDivRepo();
-  const repoListItems =
-    repoList.querySelectorAll('.d-block.width-full.py-4:not(.ghstarsmngr-hide)');
 
-  repoListItems.forEach((repo) => {
-    let loadingSpinnerContainer = repo.querySelector('.ghstarmngr-loading-spinner-container');
-    if (loadingSpinnerContainer) {
-      repo.removeChild(loadingSpinnerContainer);
-    }
-  });
+  if (repoList) {
+    const repoListItems = repoList.querySelectorAll(
+      '.d-block.width-full.py-4:not(.ghstarsmngr-hide)'
+    );
+
+    repoListItems.forEach((repo) => {
+      let loadingSpinnerContainer = repo.querySelector('.ghstarmngr-loading-spinner-container');
+      if (loadingSpinnerContainer) {
+        repo.removeChild(loadingSpinnerContainer);
+      }
+    });
+  }
 }
 
 /**
@@ -108,7 +116,7 @@ export function insertBtCreateTag(starredRepos) {
           let repoID = starredRepo.id;
           starBtContainer.innerHTML += `
             <button class="btn btn-sm ghstarmngr-create-tag-bt" data-repo="${repoID}">
-              ${getTagIcon({width: 14, height: 13})}
+              ${getTagIcon({ width: 14, height: 13 })}
               New tag
             </button>`;
         }
@@ -144,7 +152,7 @@ export function insertFooterTags(starredRepos, reposInStorage, tagsInStorage) {
     }
     tagContent += `
       <div class="ghstarmngr-repo-footer-tags">
-        ${getTagIcon({width: 14, height: 13})}
+        ${getTagIcon({ width: 14, height: 13 })}
         <p> ${numberOfTags} tag${numberOfTags === 1 ? '' : 's'}</p>`;
 
     starredRepos.forEach((starredRepo) => {
@@ -159,7 +167,7 @@ export function insertFooterTags(starredRepos, reposInStorage, tagsInStorage) {
         }
         tagContent += `
           <a href="#" class="ghstarmngr-bt-existing-tag" data-repo="${repoID}">
-            ${getPlusIcon({width: 12, height: 15})}
+            ${getPlusIcon({ width: 12, height: 15 })}
             Add existing tag
           </a>`;
       }
@@ -180,7 +188,7 @@ export function createDOMTagCell(repoID, tagName) {
   return `
     <span class= "ghstarmngr-tag-cell" data-repo="${repoID}">
       <div class="ghstarmngr-delete-tag-icon">
-        ${getTrashcan({width: 16, height: 16})} 
+        ${getTrashcan({ width: 16, height: 16 })} 
       </div>
       ${tagName}
     </span>`;
@@ -192,15 +200,21 @@ export function createDOMTagCell(repoID, tagName) {
  */
 function loopThroughRepos(callback) {
   const repoList = getContainerDivRepo();
-  const repoListItems =
-    repoList.querySelectorAll('.d-block.width-full.py-4:not(.ghstarsmngr-hide)');
 
-  repoListItems.forEach((repo) => {
-    let repoRef = repo.querySelector('.d-inline-block a')
-                      .getAttribute('href').replace('/', '');
+  if (repoList) {
+    const repoListItems = repoList.querySelectorAll(
+      '.d-block.width-full.py-4:not(.ghstarsmngr-hide)'
+    );
 
-    callback(repo, repoRef);
-  });
+    repoListItems.forEach((repo) => {
+      let repoRef = repo
+        .querySelector('.d-inline-block a')
+        .getAttribute('href')
+        .replace('/', '');
+
+      callback(repo, repoRef);
+    });
+  }
 }
 
 /**
@@ -208,6 +222,10 @@ function loopThroughRepos(callback) {
  * @return {jQuery|HTMLElement}
  */
 function getContainerDivRepo() {
-  return $('.ghstarsmngr-repo-list') || $('.js-repo-filter') || $('.repo-list') || $('.user-profile-repo-filter'); // eslint-disable-line
+  return (
+    $('.ghstarsmngr-repo-list') ||
+    $('.js-repo-filter') ||
+    $('.repo-list') ||
+    $('.user-profile-repo-filter')
+  ); // eslint-disable-line
 }
-
